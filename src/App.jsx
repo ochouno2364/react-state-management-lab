@@ -5,7 +5,7 @@ import './App.css'
 
 
 const App = () => {
-
+// Fighters array
   const fighters = [
     {
       id: 1,
@@ -89,10 +89,19 @@ const App = () => {
     },
   ]
   
-
+// State Variables
 const [team, setTeam] = useState([]);
 const [money, setMoney] = useState(100);
 const [zomebieFighters, setZombieFighters] = useState(fighters);
+
+// ADD FIGHTERS FUNCTION
+
+const handleAddFighter = ( {fighter} ) => {
+  console.log({fighter});
+setTeam([{fighter}]);
+
+
+};
 
 
 
@@ -100,7 +109,12 @@ const [zomebieFighters, setZombieFighters] = useState(fighters);
     <>
     
     <div className={zomebieFighters}>
+      <h1>Zombie Fighters</h1>
       <h2>Money: {money}</h2>
+      <h2>Strength: 0</h2>
+      <h2>Agility: 0</h2>
+      <h2>Team {team.name}</h2>
+      <h4>Pick some team members</h4>
       <ul>
         {fighters.map((fighter) => {
         return (
@@ -111,9 +125,9 @@ const [zomebieFighters, setZombieFighters] = useState(fighters);
              <br></br> Agility: {fighter.agility}
              
              <br></br>
-             <button>Add Fighter</button></li>
+             <button onClick={() => handleAddFighter()}>Add Fighter</button></li>
         )
-        })};
+        })}
       </ul>
     </div>
     

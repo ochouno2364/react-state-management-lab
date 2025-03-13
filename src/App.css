@@ -1,5 +1,7 @@
 #root {
   margin: 16px;
+  background-color: black;
+  color: aliceblue;
 }
 
 ul {
@@ -14,3 +16,4 @@ li {
   border: whitesmoke 3px solid;
   border-radius: 8px;
 }
+
