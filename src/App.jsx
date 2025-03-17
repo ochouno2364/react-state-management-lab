@@ -96,9 +96,8 @@ const [zomebieFighters, setZombieFighters] = useState(fighters);
 
 // ADD FIGHTERS FUNCTION
 
-const handleAddFighter = ( {fighter} ) => {
-  console.log({fighter});
-setTeam([{fighter}]);
+const handleAddFighter = (event, {fighter}) => {
+setTeam(event.target.value, [... fighters]);
 
 
 };
@@ -113,19 +112,19 @@ setTeam([{fighter}]);
       <h2>Money: {money}</h2>
       <h2>Strength: 0</h2>
       <h2>Agility: 0</h2>
-      <h2>Team {team.name}</h2>
+      <h2>Team: {team} </h2>
       <h4>Pick some team members</h4>
       <ul>
         {fighters.map((fighter) => {
         return (
-          <li> <img src={fighter.img}></img>
+          <li key={fighter.id}> <img src={fighter.img}></img>
           <br></br> Name: {fighter.name}
            <br></br> Price: {fighter.price}
             <br></br> Strength: {fighter.strength}
              <br></br> Agility: {fighter.agility}
              
              <br></br>
-             <button onClick={() => handleAddFighter()}>Add Fighter</button></li>
+             <button onClick={() => handleAddFighter({fighter})}>Add Fighter</button></li>
         )
         })}
       </ul>
