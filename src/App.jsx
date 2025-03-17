@@ -92,12 +92,23 @@ const App = () => {
 // State Variables
 const [team, setTeam] = useState([]);
 const [money, setMoney] = useState(100);
-const [zomebieFighters, setZombieFighters] = useState(fighters);
+const [zomebieFighters, setZombieFighters] = useState([... fighters]);
+const [agility, setAgility] = useState(0);
+const [strength, setStrength] = useState(0);
+
 
 // ADD FIGHTERS FUNCTION
 
-const handleAddFighter = (event, {fighter}) => {
-setTeam(event.target.value, [... fighters]);
+const handleAddFighter = (newFighter) => {
+if (money >= newFighter.price) {
+  setMoney(money - newFighter.price);
+  setAgility(agility + newFighter.agility);
+  setStrength(strength + newFighter.strength);
+setTeam([...team, newFighter]);
+setZombieFighters([...team - newFighter]);
+} else {
+  console.log('not enough')
+};
 
 
 };
@@ -110,9 +121,18 @@ setTeam(event.target.value, [... fighters]);
     <div className={zomebieFighters}>
       <h1>Zombie Fighters</h1>
       <h2>Money: {money}</h2>
-      <h2>Strength: 0</h2>
-      <h2>Agility: 0</h2>
-      <h2>Team: {team} </h2>
+      <h2>Strength: {strength}</h2>
+      <h2>Agility: {agility}</h2>
+      <h2>Team: {team.map((fighter) => {
+        return (
+          <li key={fighter.id}> <img src={fighter.img}></img>
+          <br></br> Name: {fighter.name}
+           <br></br> Price: {fighter.price}
+            <br></br> Strength: {fighter.strength}
+             <br></br> Agility: {fighter.agility}
+             </li>
+        )
+      })} </h2>
       <h4>Pick some team members</h4>
       <ul>
         {fighters.map((fighter) => {
@@ -124,7 +144,7 @@ setTeam(event.target.value, [... fighters]);
              <br></br> Agility: {fighter.agility}
              
              <br></br>
-             <button onClick={() => handleAddFighter({fighter})}>Add Fighter</button></li>
+             <button onClick={() => handleAddFighter(fighter)}>Add Fighter</button></li>
         )
         })}
       </ul>
